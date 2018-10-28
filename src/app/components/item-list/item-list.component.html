@@ -1,0 +1,54 @@
+
+<mat-toolbar color="primary" class="filter-container">
+  <form [formGroup]="filterForm">
+
+    <mat-form-field class="filter">
+      <input type="text" placeholder="Name"  matInput formControlName="name" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field class="filter">
+      <mat-select placeholder="Gefrierfach" formControlName="compartmentKey">
+        <mat-option [value]="null"></mat-option>
+        <mat-option *ngFor="let compartment of compartments" [value]="compartment.key">
+          {{compartment.name}}
+
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</mat-toolbar>
+
+<div class="item-container">
+  <loading *ngIf="showLoadingIndicator"></loading>
+  <mat-list *ngIf="filteredItems && !showLoadingIndicator">
+    <mat-list-item *ngIf="filteredItems?.length == 0">
+      Keine Elemente gefunden.
+    </mat-list-item>
+    <mat-list-item *ngFor="let item of filteredItems">
+      <p matLine>
+        <span class="stronger">{{item.name}}</span>
+      </p>
+      <p mat-line *ngIf="item.amount">
+        <small>Menge:<span class="stronger">{{item.amount}}</span></small>
+      </p>
+      <p matLine>
+        <small>Fach: <span class="stronger">{{getCompartment(item.compartmentKey)?.name}}</span></small>
+      </p>
+      <p matLine>
+        <small> Eingelagert am: <span class="stronger">{{item.createdDate | date}}</span></small>
+      </p>
+      <p matLine>
+        <small>Min. haltbar bis: <span class="stronger">{{item.expiryDate | date}}</span></small>
+      </p>
+      <div style="display:contents; flex-wrap:wrap; flex-direction:row;">
+        <button mat-icon-button (click)="editItem(item)"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button (click)="removeItem(item.key)"><mat-icon>delete</mat-icon></button>
+      </div>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>
+
+<button mat-fab class="floating-fab" (click)="addItem()">
+  <mat-icon>add</mat-icon>
+</button>

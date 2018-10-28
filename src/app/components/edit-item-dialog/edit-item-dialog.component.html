@@ -1,0 +1,33 @@
+<form [formGroup]="editForm" (ngSubmit)="submit()">
+  <h1 mat-dialog-title>Element bearbeiten</h1>
+
+  <div mat-dialog-content>
+
+    <mat-form-field style="width:100%;">
+      <input matInput placeholder="Name" formControlName="name" required autocomplete="off">
+      <mat-error>Name ist ein Pflichtfeld.</mat-error>
+    </mat-form-field>
+    <mat-form-field style="width:100%;">
+      <input matInput placeholder="Menge" formControlName="amount" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field style="width:100%;">
+      <input matInput placeholder="Mindesthaltbarkeit" [matDatepicker]="dpExpiryDate" formControlName="expiryDate" autocomplete="off">
+      <mat-datepicker-toggle matSuffix [for]="dpExpiryDate"></mat-datepicker-toggle>
+      <mat-datepicker #dpExpiryDate touchUi></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="width:100%">
+      <mat-select placeholder="Gefrierfach" formControlName="compartmentKey" name="food" required>
+        <mat-option *ngFor="let compartment of compartments | async" [value]="compartment.key">
+          {{compartment.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error>Gefrierfach ist ein Pflichtfeld.</mat-error>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button type="submit" mat-button [disabled]="!editForm.valid">Speichern</button>
+    <button type="button" mat-button (click)="cancel()">Abbrechen</button>
+  </div>
+</form>
+

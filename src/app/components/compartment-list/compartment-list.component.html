@@ -1,0 +1,16 @@
+<mat-list>
+  <mat-list-item *ngFor="let compartment of compartments | async">
+    <p matLine>
+      {{compartment.name}}
+    </p>
+    <div style="display:contents; flex-wrap:wrap; flex-direction:row;">
+      <button mat-icon-button (click)="editCompartment(compartment)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="removeCompartment(compartment.key)"><mat-icon>delete</mat-icon></button>
+    </div>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+</mat-list>
+
+<button mat-fab class="floating-fab" (click)="addCompartment()">
+  <mat-icon>add</mat-icon>
+</button>

@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0px;
+}
+
+.stronger {
+  font-weight: 600;
+}
+
+.floating-fab {
+  position: fixed !important;
+  right: 30px;
+  bottom: 30px;
+}
+
+.mat-list-item-content {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+  min-height: 30px !important;
+}

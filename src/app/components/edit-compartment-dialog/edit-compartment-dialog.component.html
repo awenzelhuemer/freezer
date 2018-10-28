@@ -1,0 +1,15 @@
+<form [formGroup]="editForm" (ngSubmit)="submit()">
+  <h1 mat-dialog-title>Fach bearbeiten</h1>
+
+  <div mat-dialog-content>
+    <mat-form-field style="width:100%;">
+      <input matInput placeholder="Name" formControlName="name" required autocomplete="off">
+      <mat-error>Name ist ein Pflichtfeld.</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button type="submit" mat-button [disabled]="!editForm.valid">Speichern</button>
+    <button type="button" mat-button (click)="cancel()">Abbrechen</button>
+  </div>
+</form>
+
