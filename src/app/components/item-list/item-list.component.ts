@@ -60,7 +60,7 @@ export class ItemListComponent {
   }
 
   addItem() {
-    this._dialogService.addNewItemDialog().afterClosed().subscribe(i => {
+    this._dialogService.openAddNewItemDialog().afterClosed().subscribe(i => {
 
       if (i) {
         this._itemService.add({ ...i, createdDate: moment().format("YYYY-MM-DD"), expiryDate: i.expiryDate ? moment(i.expiryDate).format("YYYY-MM-DD") : "" });
@@ -70,7 +70,7 @@ export class ItemListComponent {
   }
 
   editItem(item: Item) {
-    this._dialogService.editItemDialog(item).afterClosed().subscribe(i => {
+    this._dialogService.openEditItemDialog(item).afterClosed().subscribe(i => {
       if (i) {
         this._itemService.update({ ...i, expiryDate: i.expiryDate ? moment(i.expiryDate).format("YYYY-MM-DD") : "" });
       }
@@ -79,6 +79,12 @@ export class ItemListComponent {
   }
 
   removeItem(key: string) {
-    this._itemService.remove(key);
+    this._dialogService.openMessageDialog("Element löschen", "Soll das Element wirklich gelöscht werden?").afterClosed().subscribe(result => {
+      if (result === true) {
+        this._itemService.remove(key);
+      }
+    });
+
+  
   }
 }

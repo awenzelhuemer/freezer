@@ -6,6 +6,7 @@ import { EditItemDialogComponent } from "../components/edit-item-dialog/edit-ite
 import { Compartment } from "../models/compartment";
 import { EditCompartmentDialogComponent } from "../components/edit-compartment-dialog/edit-compartment-dialog.component";
 import { NewCompartmentDialogComponent } from "../components/new-compartment-dialog/new-compartment-dialog.component";
+import { MessageDialogComponent } from "../components/message-dialog/message-dialog.component";
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +19,19 @@ export class DialogService{
 
   }
 
-  addNewItemDialog() {
+  openMessageDialog(title: string, message: string) {
+    return this._dialog.open(MessageDialogComponent, { data: {title: title, message: message}});
+  }
+
+  openAddNewItemDialog() {
     return this._dialog.open(NewItemDialogComponent);
   }
 
-  editItemDialog(item: Item) {
+  openEditItemDialog(item: Item) {
     return this._dialog.open(EditItemDialogComponent, { data: item });
   }
 
-  addNewCompartmentDialog() {
+  openAddNewCompartmentDialog() {
     return this._dialog.open(NewCompartmentDialogComponent);
   }
 

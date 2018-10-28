@@ -5,9 +5,11 @@ import { Item } from "../../models/item";
 import { CompartmentService } from "../../services/compartment.service";
 import { Compartment } from "../../models/compartment";
 import { Observable } from "rxjs";
+import * as moment from 'moment';
 
 @Component({
-  templateUrl: './new-item-dialog.component.html'
+  templateUrl: './new-item-dialog.component.html',
+  styleUrls: ['./new-item-dialog.component.scss']
 })
 export class NewItemDialogComponent {
 
@@ -27,7 +29,7 @@ export class NewItemDialogComponent {
     this.newForm = this._formBuilder.group({
       name: ['', Validators.required],
       amount: [''],
-      expiryDate: [''],
+      expiryDate: [moment().add(200, 'days')],
       compartmentKey: ['', Validators.required]
     });
   }

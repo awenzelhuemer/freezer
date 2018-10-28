@@ -18,6 +18,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
 import { NewItemDialogComponent } from './components/new-item-dialog/new-item-dialog.component';
 import { MaterialModule } from './material.module';
 import { LoadingComponent } from './components/loading/loading.component';
+import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 
 registerLocaleData(localeAT);
 
@@ -31,6 +32,7 @@ registerLocaleData(localeAT);
     , EditCompartmentDialogComponent
     , NewCompartmentDialogComponent
     , LoadingComponent
+    , MessageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +51,7 @@ registerLocaleData(localeAT);
     , EditItemDialogComponent
     , EditCompartmentDialogComponent
     , NewCompartmentDialogComponent
+    , MessageDialogComponent
   ]
 })
 export class AppModule { }

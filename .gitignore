@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+.firebase
 
 # dependencies
 /node_modules
@@ -19,6 +20,7 @@
 
 # IDE - VSCode
 .vscode/*
+.vs/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -37,8 +39,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-.vs/Freezer.Web.App/v15/.suo
-.firebase/hosting.ZGlzdFxmcmVlemVy.cache
-.vs/config/applicationhost.config
-.vs/slnx.sqlite
-.vs/VSWorkspaceState.json

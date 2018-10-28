@@ -22,7 +22,7 @@ export class CompartmentListComponent implements OnInit {
   }
 
   addCompartment() {
-    this._dialogService.addNewCompartmentDialog().afterClosed().subscribe(i => {
+    this._dialogService.openAddNewCompartmentDialog().afterClosed().subscribe(i => {
       if (i) {
         this._compartmentService.add(i);
       }
@@ -39,7 +39,10 @@ export class CompartmentListComponent implements OnInit {
   }
 
   removeCompartment(key: string) {
-    this._compartmentService.remove(key);
+    this._dialogService.openMessageDialog("Fach löschen", "Soll das Fach wirklich gelöscht werden?").afterClosed().subscribe(result => {
+      if (result === true) {
+        this._compartmentService.remove(key);
+      }
+    });
   }
-
 }

@@ -34,10 +34,10 @@
       <p matLine>
         <small>Fach: <span class="stronger">{{getCompartment(item.compartmentKey)?.name}}</span></small>
       </p>
-      <p matLine>
+      <p matLine *ngIf="item.createdDate">
         <small> Eingelagert am: <span class="stronger">{{item.createdDate | date}}</span></small>
       </p>
-      <p matLine>
+      <p matLine *ngIf="item.expiryDate">
         <small>Min. haltbar bis: <span class="stronger">{{item.expiryDate | date}}</span></small>
       </p>
       <div style="display:contents; flex-wrap:wrap; flex-direction:row;">
