@@ -84,7 +84,9 @@ export class ItemListComponent {
         this._itemService.remove(key);
       }
     });
+  }
 
-  
+  trackByKey(index, item) {
+    return item.key;
   }
 }

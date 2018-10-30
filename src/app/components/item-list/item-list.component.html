@@ -3,7 +3,7 @@
   <form [formGroup]="filterForm">
 
     <mat-form-field class="filter">
-      <input type="text" placeholder="Name"  matInput formControlName="name" autocomplete="off" />
+      <input type="text" placeholder="Name" matInput formControlName="name" autocomplete="off" />
     </mat-form-field>
 
     <mat-form-field class="filter">
@@ -20,31 +20,54 @@
 
 <div class="item-container">
   <loading *ngIf="showLoadingIndicator"></loading>
+
+  <!--<mat-card *ngFor="let item of filteredItems">
+    <mat-card-header>
+      <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-chip-list>
+        <mat-chip color="accent" selected>Menge: {{item.amount}}</mat-chip>
+        <mat-chip color="primary" selected>Fach: {{getCompartment(item.compartmentKey)?.name}}</mat-chip>
+        <mat-chip>Eingelagert: {{item.createdDate | date}}</mat-chip>
+        <mat-chip>Min. haltbar: {{item.expiryDate | date}}</mat-chip>
+      </mat-chip-list>
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+  </mat-card>-->
+
   <mat-list *ngIf="filteredItems && !showLoadingIndicator">
-    <mat-list-item *ngIf="filteredItems?.length == 0">
-      Keine Elemente gefunden.
-    </mat-list-item>
-    <mat-list-item *ngFor="let item of filteredItems">
-      <p matLine>
-        <span class="stronger">{{item.name}}</span>
-      </p>
-      <p mat-line *ngIf="item.amount">
-        <small>Menge:<span class="stronger">{{item.amount}}</span></small>
-      </p>
-      <p matLine>
-        <small>Fach: <span class="stronger">{{getCompartment(item.compartmentKey)?.name}}</span></small>
-      </p>
-      <p matLine *ngIf="item.createdDate">
-        <small> Eingelagert am: <span class="stronger">{{item.createdDate | date}}</span></small>
-      </p>
-      <p matLine *ngIf="item.expiryDate">
-        <small>Min. haltbar bis: <span class="stronger">{{item.expiryDate | date}}</span></small>
-      </p>
-      <div style="display:contents; flex-wrap:wrap; flex-direction:row;">
-        <button mat-icon-button (click)="editItem(item)"><mat-icon>edit</mat-icon></button>
-        <button mat-icon-button (click)="removeItem(item.key)"><mat-icon>delete</mat-icon></button>
+    <mat-list-item *ngFor="let item of filteredItems; trackByKey">
+      <div mat-line class="container-justify-content-between">
+          <span>
+            <ng-container *ngIf="item.amount">{{item.amount}} </ng-container>
+            <strong>{{item.name}} </strong>
+          </span>
+          <span>{{getCompartment(item.compartmentKey)?.name}}</span>
       </div>
+      <div mat-line class="container-justify-content-between">
+        <span>Eingelagert: {{item.createdDate | date}}</span>
+        <span>Min. haltbar: {{item.expiryDate | date}}</span>
+      </div>
+
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="editItem(item)">
+          <mat-icon>edit</mat-icon>
+          <span>Bearbeiten</span>
+        </button>
+        <button mat-menu-item (click)="removeItem(item.key)">
+          <mat-icon>delete</mat-icon>
+          <span>Löschen</span>
+        </button>
+      </mat-menu>
       <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item>
+      <span *ngIf="filteredItems?.length == 0">Keine Elemente gefunden.</span>
     </mat-list-item>
   </mat-list>
 </div>

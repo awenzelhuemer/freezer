@@ -3,10 +3,20 @@
     <p matLine>
       {{compartment.name}}
     </p>
-    <div style="display:contents; flex-wrap:wrap; flex-direction:row;">
-      <button mat-icon-button (click)="editCompartment(compartment)"><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button (click)="removeCompartment(compartment.key)"><mat-icon>delete</mat-icon></button>
-    </div>
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editCompartment(compartment)">
+        <mat-icon>edit</mat-icon>
+        <span>Bearbeiten</span>
+      </button>
+      <button mat-menu-item (click)="removeCompartment(compartment.key)">
+        <mat-icon>delete</mat-icon>
+        <span>Löschen</span>
+      </button>
+    </mat-menu>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

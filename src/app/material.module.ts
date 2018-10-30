@@ -18,6 +18,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   imports: [MatToolbarModule
@@ -38,6 +39,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     , MatAutocompleteModule
     , MatSlideToggleModule
     , MatProgressSpinnerModule
+    , MatChipsModule
   ],
   exports: [
     MatToolbarModule
@@ -59,6 +61,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
     , MatAutocompleteModule
     , MatSlideToggleModule
     , MatProgressSpinnerModule
+    , MatChipsModule
   ]
 })
 export class MaterialModule{

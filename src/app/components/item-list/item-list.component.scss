@@ -1,5 +1,5 @@
 .filter-container {
-  font-size: 14px;
+  font-size: 14.5px;
   position: fixed;
   z-index: 1000;
 }
@@ -11,4 +11,10 @@
 .filter{
   width: 110px;
   margin: 10px;
+}
+
+.container-justify-content-between {
+  display: flex !important;
+  flex-direction: row;
+  justify-content: space-between;
 }
