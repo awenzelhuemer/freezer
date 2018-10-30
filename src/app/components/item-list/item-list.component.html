@@ -21,34 +21,20 @@
 <div class="item-container">
   <loading *ngIf="showLoadingIndicator"></loading>
 
-  <!--<mat-card *ngFor="let item of filteredItems">
-    <mat-card-header>
-      <mat-card-title>{{item.name}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-chip-list>
-        <mat-chip color="accent" selected>Menge: {{item.amount}}</mat-chip>
-        <mat-chip color="primary" selected>Fach: {{getCompartment(item.compartmentKey)?.name}}</mat-chip>
-        <mat-chip>Eingelagert: {{item.createdDate | date}}</mat-chip>
-        <mat-chip>Min. haltbar: {{item.expiryDate | date}}</mat-chip>
-      </mat-chip-list>
-    </mat-card-content>
-
-    <mat-divider></mat-divider>
-  </mat-card>-->
-
   <mat-list *ngIf="filteredItems && !showLoadingIndicator">
     <mat-list-item *ngFor="let item of filteredItems; trackByKey">
-      <div mat-line class="container-justify-content-between">
-          <span>
-            <ng-container *ngIf="item.amount">{{item.amount}} </ng-container>
-            <strong>{{item.name}} </strong>
-          </span>
-          <span>{{getCompartment(item.compartmentKey)?.name}}</span>
+      <div mat-line class="item-property-container">
+        <div class="left-item">
+          <strong>{{item.name}} </strong>
+          <ng-container *ngIf="item.amount">{{item.amount}} </ng-container>
+        </div>
+        <span>{{getCompartment(item.compartmentKey)?.name}}</span>
       </div>
-      <div mat-line class="container-justify-content-between">
-        <span>Eingelagert: {{item.createdDate | date}}</span>
-        <span>Min. haltbar: {{item.expiryDate | date}}</span>
+      <div mat-line class="item-property-container">
+        <div class="left-item">
+          <ng-container *ngIf="item.createdDate">Eingelagert: {{item.createdDate | date}}</ng-container>
+        </div>
+        <span *ngIf="item.expiryDate">Min. haltbar: {{item.expiryDate | date}}</span>
       </div>
 
       <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -66,8 +52,9 @@
       </mat-menu>
       <mat-divider></mat-divider>
     </mat-list-item>
-    <mat-list-item>
-      <span *ngIf="filteredItems?.length == 0">Keine Elemente gefunden.</span>
+    <!-- empty -->
+    <mat-list-item *ngIf="filteredItems?.length == 0">
+      Keine Elemente gefunden.
     </mat-list-item>
   </mat-list>
 </div>

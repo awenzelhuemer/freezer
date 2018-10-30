@@ -1,6 +1,6 @@
 {
   "name": "freezer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "scripts": {
     "publish": "ng build -c production && firebase deploy"
   },

@@ -8,14 +8,28 @@
   margin-top: 64px;
 }
 
-.filter{
+@media (max-width: 599px) {
+  .item-container {
+    margin-top: 56px;
+  }
+}
+
+.mat-list{
+  padding-top:0px;
+}
+
+.filter {
   width: 110px;
   margin: 10px;
 }
 
-.mat-list.item .container-justify-content-between {
-  display: flex;
+.item-property-container {
+  display: flex !important;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap:wrap;
+}
+
+.left-item{
+  margin-right:10px;
 }
