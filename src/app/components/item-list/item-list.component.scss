@@ -13,8 +13,8 @@
   margin: 10px;
 }
 
-.container-justify-content-between {
-  display: flex !important;
+.mat-list.item .container-justify-content-between {
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap:wrap;
