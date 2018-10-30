@@ -46,12 +46,10 @@
           </span>
           <span>{{getCompartment(item.compartmentKey)?.name}}</span>
       </div>
-      <p mat-line>
+      <div mat-line class="container-justify-content-between">
         <span>Eingelagert: {{item.createdDate | date}}</span>
-      </p>
-      <p mat-line>
-        Min. haltbar: {{item.expiryDate | date}}
-      </p>
+        <span>Min. haltbar: {{item.expiryDate | date}}</span>
+      </div>
 
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
