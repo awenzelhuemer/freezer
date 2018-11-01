@@ -3,6 +3,7 @@ import localeAT from '@angular/common/locales/de-AT';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,6 +20,7 @@ import { NewItemDialogComponent } from './components/new-item-dialog/new-item-di
 import { MaterialModule } from './material.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
 
 registerLocaleData(localeAT);
 
@@ -33,6 +35,7 @@ registerLocaleData(localeAT);
     , NewCompartmentDialogComponent
     , LoadingComponent
     , MessageDialogComponent
+    , SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +43,7 @@ registerLocaleData(localeAT);
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

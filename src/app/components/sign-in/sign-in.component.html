@@ -1,0 +1,31 @@
+
+
+<div class="sign-in-container">
+  <mat-card class="sign-in-form">
+    <mat-card-title>
+      Anmelden
+    </mat-card-title>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <mat-card-content>
+
+        <mat-form-field class="w-100">
+          <input type="email" matInput placeholder="E-Mail" formControlName="email" required autocomplete="off">
+          <mat-error *ngIf="loginForm.get('email').errors?.required">E-Mail ist ein Pflichtfeld.</mat-error>
+          <mat-error *ngIf="loginForm.get('email').errors?.email">Es muss eine gültige E-Mail eingegeben werden.</mat-error>
+        </mat-form-field>
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Passwort" formControlName="password" required autocomplete="off" type="password">
+          <mat-error>Passwort ist ein Pflichtfeld.</mat-error>
+        </mat-form-field>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button type="button" mat-button (click)="resetPassword()" [disabled]="loginForm.get('email').errors" color="primary" class="w-100">
+          <small>Passwort zurücksetzen</small>
+        </button>
+        <button mat-raised-button color="primary" [disabled]="!loginForm.valid" class="w-100" style="margin:0px;">Anmelden</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

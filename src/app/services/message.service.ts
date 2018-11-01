@@ -12,6 +12,10 @@ export class MessageService{
 
   }
 
+  dismiss() {
+    this._snackBar.dismiss();
+  }
+
   showMessage(message: string, action: string = "X", autoclose: boolean = false) {
     return this._snackBar.open(
       message
