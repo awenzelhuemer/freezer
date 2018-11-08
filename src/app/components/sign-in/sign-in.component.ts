@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { DialogService } from '../../services/dialog.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   selector: 'sign-in',
@@ -19,9 +20,11 @@ export class SignInComponent implements OnInit {
     , private _authService: AuthService
     , private _router: Router
     , private _messageService: MessageService
+    , private _titleService: TitleService
   ) { }
 
   ngOnInit() {
+    this._titleService.set("Anmelden");
     this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
