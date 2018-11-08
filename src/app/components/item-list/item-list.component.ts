@@ -56,6 +56,8 @@ export class ItemListComponent {
   }
 
   filter() {
+    this.items.every(i => i.selected = false);
+
     var nameFilter: string = this.filterForm.get("name").value;
     var compartmentKeyFilter: string = this.filterForm.get("compartmentKey").value;
 
