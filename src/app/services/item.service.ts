@@ -31,7 +31,7 @@ export class ItemService {
   }
 
   add(item: Item) {
-    this._itemRef.push({ ...item, selected: null});
+    this._itemRef.push(item);
   }
 
 
