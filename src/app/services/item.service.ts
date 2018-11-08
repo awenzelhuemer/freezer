@@ -31,7 +31,7 @@ export class ItemService {
   }
 
   add(item: Item) {
-    this._itemRef.push(item);
+    this._itemRef.push({ ...item, selected: null});
   }
 
 
@@ -40,6 +40,6 @@ export class ItemService {
   }
 
   update(item: Item) {
-    this._itemRef.update(item.key, {...item, key: null});
+    this._itemRef.update(item.key, {...item, key: null, selected: null});
   }
 }

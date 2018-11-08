@@ -19,7 +19,7 @@ export class DialogService{
 
   }
 
-  openMessageDialog(title: string, message: string) {
+  openMessageDialog(message: string, title: string = null) {
     return this._dialog.open(MessageDialogComponent, { data: {title: title, message: message}});
   }
 

@@ -5,4 +5,5 @@ export interface Item {
   key?: string;
   compartmentKey: string;
   createdDate: string;
+  selected: boolean;
 }

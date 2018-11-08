@@ -1,9 +1,10 @@
-<div mat-dialog-content>
-  <h4>{{data?.title}}</h4>
-  <p>{{data?.message}}</p>
-</div>
+<h1 mat-dialog-title *ngIf="data?.title">{{data?.title}}</h1>
 
-<div mat-dialog-actions>
-  <button type="button" mat-button color="primary" [mat-dialog-close]="true">Ja</button>
-  <button type="button" mat-button color="primary" [mat-dialog-close]="false">Nein</button>
-</div>
+  <div mat-dialog-content>
+    {{data?.message}}
+  </div>
+
+  <div mat-dialog-actions>
+    <button type="button" mat-raised-button color="primary" [mat-dialog-close]="true">Ja</button>
+    <button type="button" mat-button color="error" [mat-dialog-close]="false">Nein</button>
+  </div>

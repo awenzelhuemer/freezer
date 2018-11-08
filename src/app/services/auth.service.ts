@@ -23,6 +23,10 @@ export class AuthService {
     })
   }
 
+  getEmail() {
+    return this.isLoggedIn() ? firebase.auth().currentUser.email : null;
+  }
+
   isLoggedIn() {
     return firebase.auth().currentUser != null;
   }

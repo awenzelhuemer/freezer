@@ -43,6 +43,6 @@ export class CompartmentService {
   }
 
   update(item: Compartment) {
-    this._compartmentRef.update(item.key, { ...item, key: null });
+    this._compartmentRef.update(item.key, { ...item, key: null, selected: null });
   }
 }

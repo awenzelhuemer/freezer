@@ -1,26 +1,24 @@
 <mat-list>
-  <mat-list-item *ngFor="let compartment of compartments | async">
-    <p matLine>
-      {{compartment.name}}
-    </p>
-
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="editCompartment(compartment)">
-        <mat-icon>edit</mat-icon>
-        <span>Bearbeiten</span>
-      </button>
-      <button mat-menu-item (click)="removeCompartment(compartment.key)">
-        <mat-icon>delete</mat-icon>
-        <span>Löschen</span>
-      </button>
-    </mat-menu>
+  <mat-list-item *ngFor="let compartment of compartments"
+                 [class.active]="compartment.selected"
+                 (click)="selectCompartment(compartment)">
+    {{compartment.name}}
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>
 
-<button mat-fab class="floating-fab" (click)="addCompartment()">
+<ng-container *ngIf="hasSelected">
+  <button mat-fab color="error" class="floating-fab-secondary" 
+          (click)="removeCompartment(selectedCompartment)">
+    <mat-icon>delete</mat-icon>
+  </button>
+
+  <button mat-fab color="primary" class="floating-fab"
+          (click)="editCompartment(selectedCompartment)">
+    <mat-icon>edit</mat-icon>
+  </button>
+</ng-container>
+
+<button mat-fab color="primary" class="floating-fab" (click)="addCompartment()" *ngIf="!hasSelected">
   <mat-icon>add</mat-icon>
 </button>

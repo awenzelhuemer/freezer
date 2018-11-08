@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
+import * as moment from 'moment';
 import { Compartment } from "../../models/compartment";
 import { Item } from "../../models/item";
 import { CompartmentService } from "../../services/compartment.service";
 import { DialogService } from "../../services/dialog.service";
 import { ItemService } from "../../services/item.service";
-import * as moment from 'moment';
+import { TitleService } from "../../services/title.service";
 
 @Component({
   templateUrl: './item-list.component.html',
@@ -18,6 +19,8 @@ export class ItemListComponent {
   filteredItems: Item[];
   filterForm: FormGroup;
 
+  editMode: boolean = false;
+
   showLoadingIndicator: boolean = false;
 
   constructor(
@@ -25,16 +28,18 @@ export class ItemListComponent {
     , private _compartmentService: CompartmentService
     , private _itemService: ItemService
     , formBuilder: FormBuilder
+    , private _titleService: TitleService
   ) {
     this.filterForm = formBuilder.group({
       name: [null],
       compartmentKey: [null]
     });
 
-    this.filterForm.valueChanges.subscribe(v => this.filter())
+    this.filterForm.valueChanges.subscribe(v => this.filter());
   }
 
   ngOnInit() {
+    this._titleService.set("Inhalte");
     this._compartmentService.get().subscribe(c => this.compartments = c);
 
     this.showLoadingIndicator = true;
@@ -44,6 +49,10 @@ export class ItemListComponent {
 
       this.showLoadingIndicator = false;
     });
+  }
+
+  onTap(item: Item) {
+    this.editItem(item);
   }
 
   filter() {
@@ -78,12 +87,24 @@ export class ItemListComponent {
 
   }
 
-  removeItem(key: string) {
-    this._dialogService.openMessageDialog("Element löschen", "Soll das Element wirklich gelöscht werden?").afterClosed().subscribe(result => {
+  removeItem(item: Item) {
+    this._dialogService.openMessageDialog("Soll der Inhalt wirklich gelöscht werden?").afterClosed().subscribe(result => {
       if (result === true) {
-        this._itemService.remove(key);
+        this._itemService.remove(item.key);
       }
     });
+  }
+
+  get hasSelected() {
+    return this.filteredItems && this.filteredItems.filter(i => i.selected).length > 0;
+  }
+
+  get selectedItem() {
+    return this.filteredItems.filter(i => i.selected)[0];
+  }
+
+  selectItem(item: Item) {
+    this.filteredItems.forEach(i => i.selected = item.key == i.key ? !item.selected : false);
   }
 
   trackByKey(index, item) {
