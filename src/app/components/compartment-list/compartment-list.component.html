@@ -1,24 +1,26 @@
-<mat-list>
-  <mat-list-item *ngFor="let compartment of compartments"
-                 [class.active]="compartment.selected"
-                 (click)="selectCompartment(compartment)">
-    {{compartment.name}}
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
+<div class="compartment-container">
+  <mat-list>
+    <mat-list-item *ngFor="let compartment of compartments"
+                   [class.active]="compartment.selected"
+                   (click)="selectCompartment(compartment)">
+      <strong class="item-secondary">{{compartment.name}}</strong>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
 
-<ng-container *ngIf="hasSelected">
-  <button mat-fab color="error" class="floating-fab-secondary" 
-          (click)="removeCompartment(selectedCompartment)">
-    <mat-icon>delete</mat-icon>
+  <ng-container *ngIf="hasSelected">
+    <button mat-fab color="error" class="floating-fab-secondary"
+            (click)="removeCompartment(selectedCompartment)">
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <button mat-fab color="primary" class="floating-fab"
+            (click)="editCompartment(selectedCompartment)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </ng-container>
+
+  <button mat-fab color="primary" class="floating-fab" (click)="addCompartment()" *ngIf="!hasSelected">
+    <mat-icon>add</mat-icon>
   </button>
-
-  <button mat-fab color="primary" class="floating-fab"
-          (click)="editCompartment(selectedCompartment)">
-    <mat-icon>edit</mat-icon>
-  </button>
-</ng-container>
-
-<button mat-fab color="primary" class="floating-fab" (click)="addCompartment()" *ngIf="!hasSelected">
-  <mat-icon>add</mat-icon>
-</button>
+</div>

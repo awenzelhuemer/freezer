@@ -30,11 +30,11 @@
         </div>
         <span>{{getCompartment(item.compartmentKey)?.name}}</span>
       </div>
-      <div mat-line class="item-property-container">
-        <div class="left-item" *ngIf="item.createdDate">
+      <div mat-line class="item-property-container item-secondary">
+        <div class="left-item" *ngIf="item.createdDate"  [ngClass]="getDateAddedStyle(item.createdDate)">
           Eingelagert: {{item.createdDate | date}}
         </div>
-        <span *ngIf="item.expiryDate">Min. haltbar: {{item.expiryDate | date}}</span>
+        <span *ngIf="item.expiryDate" [ngClass]="getDateExpirationStyle(item.expiryDate)">Min. haltbar: {{item.expiryDate | date}}</span>
       </div>
 
       <mat-divider></mat-divider>

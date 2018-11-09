@@ -31,11 +31,16 @@ h1.app-name {
   flex: 1 0 auto;
 }
 
-.mat-nav-list {
-  padding-top: 0px;
+.mat-nav-list .mat-list-item {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 13px;
 }
 
-.list-item-bottom {
+.mat-sidenav {
+  width: 300px;
+}
+
+.bottom-list{
   position: absolute;
   bottom: 0;
   left: 0;

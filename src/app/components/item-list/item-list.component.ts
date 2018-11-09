@@ -112,4 +112,20 @@ export class ItemListComponent {
   trackByKey(index, item) {
     return item.key;
   }
+
+  getDateAddedStyle(date: string) {
+    if (moment(date).add('days', 200).isSameOrAfter(moment())) {
+      return "unexpired";
+    } else {
+      return "expired";
+    }
+  }
+
+  getDateExpirationStyle(date: string) {
+    if (moment(date).add('days', 30).isSameOrAfter(moment())) {
+      return "unexpired";
+    } else {
+      return "expired";
+    }
+  }
 }
