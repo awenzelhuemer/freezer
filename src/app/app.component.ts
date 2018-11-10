@@ -44,8 +44,8 @@ export class AppComponent {
   resetPassword() {
     this._authService.doResetPassword(this.email).then(res => {
       this._messageService.showMessage("E-Mail zum Zurücksetzen wurde versendet. Bitte nach Ändern des Passworts erneut anmelden.");
-      this.sidenav.close();
-      this._router.navigate(['/sign-in']);
+      this.closeSidenav()
+      this._gotToSignIn();
     });
   }
 
@@ -53,10 +53,18 @@ export class AppComponent {
     return this._authService.isLoggedIn();
   }
 
+  closeSidenav() {
+    this.sidenav.close();
+  }
+
+  private _gotToSignIn() {
+    this._router.navigate(['/sign-in']);
+  }
+
   signOut() {
     this._authService.doLogout();
-    this.sidenav.close();
-    this._router.navigate(['/sign-in']);
+    this.closeSidenav()
+    this._gotToSignIn();
   }
 
 }
