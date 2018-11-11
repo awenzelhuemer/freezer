@@ -114,7 +114,7 @@ export class ItemListComponent {
   }
 
   getDateAddedStyle(date: string) {
-    if (moment(date).add('days', 200).isSameOrAfter(moment())) {
+    if (moment(date).add(200, 'days').isSameOrAfter(moment())) {
       return "unexpired";
     } else {
       return "expired";
@@ -122,7 +122,7 @@ export class ItemListComponent {
   }
 
   getDateExpirationStyle(date: string) {
-    if (moment(date).add('days', 30).isSameOrAfter(moment())) {
+    if (moment(date).add(30, 'days').isSameOrAfter(moment())) {
       return "unexpired";
     } else {
       return "expired";
