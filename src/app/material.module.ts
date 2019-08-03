@@ -64,6 +64,6 @@ import { MatChipsModule } from '@angular/material/chips';
     , MatChipsModule
   ]
 })
-export class MaterialModule{
+export class MaterialModule {
 
 }

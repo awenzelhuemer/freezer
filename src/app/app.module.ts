@@ -21,6 +21,7 @@ import { MaterialModule } from './material.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeAT);
 
@@ -40,6 +41,7 @@ registerLocaleData(localeAT);
   imports: [
     BrowserModule,
     MaterialModule,
+    HttpClientModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,

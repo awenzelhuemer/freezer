@@ -20,7 +20,7 @@ export class CompartmentListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this._titleService.set("Gefrierfächer");
+    this._titleService.set('Gefrierfächer');
     this._compartmentService.get().subscribe(c => this.compartments = c);
   }
 
@@ -41,7 +41,7 @@ export class CompartmentListComponent implements OnInit {
   }
 
   removeCompartment(compartment: Compartment) {
-    this._dialogService.openMessageDialog("Soll das Fach wirklich gelöscht werden?").afterClosed().subscribe(result => {
+    this._dialogService.openMessageDialog('Soll das Fach wirklich gelöscht werden?').afterClosed().subscribe(result => {
       if (result === true) {
         this._compartmentService.remove(compartment.key);
       }
@@ -57,6 +57,6 @@ export class CompartmentListComponent implements OnInit {
   }
 
   selectCompartment(compartment: Compartment) {
-    this.compartments.forEach(i => i.selected = compartment.key == i.key ? !compartment.selected : false);
+    this.compartments.forEach(i => i.selected = compartment.key === i.key ? !compartment.selected : false);
   }
 }

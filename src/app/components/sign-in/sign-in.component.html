@@ -1,13 +1,12 @@
 
 
 <div class="sign-in-container">
-  <mat-card class="sign-in-form">
-    <mat-card-title>
-      Anmelden
-    </mat-card-title>
-
-      <mat-card-content>
-        <button type="button" mat-raised-button color="primary" class="w-100" (click)="login()" [disabled]="!users">Mit Google anmelden</button>
-      </mat-card-content>
-  </mat-card>
+        <button type="button"
+        mat-raised-button
+        (click)="login()"
+        [disabled]="!users"
+        class="btn-google">
+          <mat-icon svgIcon="google"></mat-icon>
+          Mit Google anmelden
+        </button>
 </div>
