@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MessageService{
+export class MessageService {
 
   constructor(
     private _snackBar: MatSnackBar
@@ -16,7 +16,7 @@ export class MessageService{
     this._snackBar.dismiss();
   }
 
-  showMessage(message: string, action: string = "X", autoclose: boolean = false) {
+  showMessage(message: string, action: string = 'X', autoclose: boolean = false) {
     return this._snackBar.open(
       message
       , autoclose ? null : action

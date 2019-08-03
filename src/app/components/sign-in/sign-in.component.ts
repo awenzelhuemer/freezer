@@ -5,47 +5,37 @@ import { Router } from '@angular/router';
 import { MessageService } from '../../services/message.service';
 import { DialogService } from '../../services/dialog.service';
 import { TitleService } from '../../services/title.service';
+import { User } from '../../models/user';
+import { map } from 'rxjs/operators';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent {
 
-  loginForm: FormGroup;
+users: User[];
 
   constructor(
-    private _formBuilder: FormBuilder
-    , private _authService: AuthService
-    , private _router: Router
-    , private _messageService: MessageService
-    , private _titleService: TitleService
-  ) { }
-
-  ngOnInit() {
-    this._titleService.set("Anmelden");
-    this.loginForm = this._formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
-    });
+    private _authService: AuthService,
+    private _router: Router,
+    private _messageService: MessageService
+  ) {
+    this._authService.allowedUsers().then(u => this.users = u.val());
   }
 
-  submit() {
-    this._messageService.dismiss();
-
-    this._authService.doLogin(this.loginForm.value).then(res => {
-      this._router.navigate(['/']);
+  login() {
+    this._authService.doGoogleLogin().then(res => {
+      if (res.user && this.users.filter(u => u.email === res.user.email).length > 0) {
+        this._router.navigate(['/']);
+        this._messageService.showMessage('Anmeldung erfolgreich.');
+      } else {
+        this._messageService.showMessage('Anmeldung fehlgeschlagen.');
+      }
     }, err => {
-      this._messageService.showMessage("Es konnte kein Benutzer mit dieser E-Mail und diesem Passwort gefunden werden.");
-    })
-  }
-
-  resetPassword() {
-    this._authService.doResetPassword(this.loginForm.get('email').value).then(res => {
-      this._messageService.showMessage("E-Mail zum Zurücksetzen wurde versendet.");
-    }, err => {
-      this._messageService.showMessage("E-Mail existiert nicht.");
+      this._messageService.showMessage('Anmeldung fehlgeschlagen.');
     });
   }
 }

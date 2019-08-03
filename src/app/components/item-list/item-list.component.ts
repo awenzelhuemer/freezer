@@ -1,27 +1,27 @@
-import { Component } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
-import { Compartment } from "../../models/compartment";
-import { Item } from "../../models/item";
-import { CompartmentService } from "../../services/compartment.service";
-import { DialogService } from "../../services/dialog.service";
-import { ItemService } from "../../services/item.service";
-import { TitleService } from "../../services/title.service";
+import { Compartment } from '../../models/compartment';
+import { Item } from '../../models/item';
+import { CompartmentService } from '../../services/compartment.service';
+import { DialogService } from '../../services/dialog.service';
+import { ItemService } from '../../services/item.service';
+import { TitleService } from '../../services/title.service';
 
 @Component({
   templateUrl: './item-list.component.html',
   styleUrls: ['./item-list.component.scss']
 })
-export class ItemListComponent {
+export class ItemListComponent implements OnInit {
 
   compartments: Compartment[];
   items: Item[];
   filteredItems: Item[];
   filterForm: FormGroup;
 
-  editMode: boolean = false;
+  editMode = false;
 
-  showLoadingIndicator: boolean = false;
+  showLoadingIndicator = false;
 
   constructor(
     private _dialogService: DialogService
@@ -39,7 +39,7 @@ export class ItemListComponent {
   }
 
   ngOnInit() {
-    this._titleService.set("Inhalte");
+    this._titleService.set('Inhalte');
     this._compartmentService.get().subscribe(c => this.compartments = c);
 
     this.showLoadingIndicator = true;
@@ -58,15 +58,15 @@ export class ItemListComponent {
   filter() {
     this.items.forEach(i => i.selected = false);
 
-    var nameFilter: string = this.filterForm.get("name").value;
-    var compartmentKeyFilter: string = this.filterForm.get("compartmentKey").value;
+    const nameFilter: string = this.filterForm.get('name').value;
+    const compartmentKeyFilter: string = this.filterForm.get('compartmentKey').value;
 
     this.filteredItems = this.items.filter(i => (!nameFilter || i.name.toUpperCase().indexOf(nameFilter.toUpperCase()) > -1)
                                              && ((!compartmentKeyFilter || i.compartmentKey === compartmentKeyFilter)));
   }
 
   getCompartment(key: string) {
-    let result = this.compartments.filter(c => c.key == key);
+    const result = this.compartments.filter(c => c.key === key);
     return result ? result[0] : null;
   }
 
@@ -74,7 +74,11 @@ export class ItemListComponent {
     this._dialogService.openAddNewItemDialog().afterClosed().subscribe(i => {
 
       if (i) {
-        this._itemService.add({ ...i, createdDate: moment().format("YYYY-MM-DD"), expiryDate: i.expiryDate ? moment(i.expiryDate).format("YYYY-MM-DD") : "" });
+        this._itemService.add({
+          ...i,
+          createdDate: moment().format('YYYY-MM-DD'),
+          expiryDate: i.expiryDate ? moment(i.expiryDate).format('YYYY-MM-DD') : '' }
+        );
       }
     });
 
@@ -83,14 +87,14 @@ export class ItemListComponent {
   editItem(item: Item) {
     this._dialogService.openEditItemDialog(item).afterClosed().subscribe(i => {
       if (i) {
-        this._itemService.update({ ...i, expiryDate: i.expiryDate ? moment(i.expiryDate).format("YYYY-MM-DD") : "" });
+        this._itemService.update({ ...i, expiryDate: i.expiryDate ? moment(i.expiryDate).format('YYYY-MM-DD') : '' });
       }
     });
 
   }
 
   removeItem(item: Item) {
-    this._dialogService.openMessageDialog("Soll der Inhalt wirklich gelöscht werden?").afterClosed().subscribe(result => {
+    this._dialogService.openMessageDialog('Soll der Inhalt wirklich gelöscht werden?').afterClosed().subscribe(result => {
       if (result === true) {
         this._itemService.remove(item.key);
       }
@@ -106,7 +110,7 @@ export class ItemListComponent {
   }
 
   selectItem(item: Item) {
-    this.filteredItems.forEach(i => i.selected = item.key == i.key ? !item.selected : false);
+    this.filteredItems.forEach(i => i.selected = item.key === i.key ? !item.selected : false);
   }
 
   trackByKey(index, item) {
@@ -115,17 +119,17 @@ export class ItemListComponent {
 
   getDateAddedStyle(date: string) {
     if (moment(date).add(200, 'days').isSameOrAfter(moment())) {
-      return "unexpired";
+      return 'unexpired';
     } else {
-      return "expired";
+      return 'expired';
     }
   }
 
   getDateExpirationStyle(date: string) {
     if (moment(date).add(30, 'days').isSameOrAfter(moment())) {
-      return "unexpired";
+      return 'unexpired';
     } else {
-      return "expired";
+      return 'expired';
     }
   }
 }

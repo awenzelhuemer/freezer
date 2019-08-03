@@ -36,7 +36,7 @@ export class ItemService {
 
 
   remove(key: string) {
-    this._itemRef.remove(key)
+    this._itemRef.remove(key);
   }
 
   update(item: Item) {

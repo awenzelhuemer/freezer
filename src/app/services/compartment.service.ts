@@ -39,7 +39,7 @@ export class CompartmentService {
 
 
   remove(key: string) {
-    this._compartmentRef.remove(key)
+    this._compartmentRef.remove(key);
   }
 
   update(item: Compartment) {

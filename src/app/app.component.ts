@@ -13,7 +13,7 @@ import { UpdateService } from './services/update.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  @ViewChild('snav') sidenav: MatSidenav;
+  @ViewChild('snav', { static: false }) sidenav: MatSidenav;
 
   mobileQuery: MediaQueryList;
 
@@ -41,14 +41,6 @@ export class AppComponent {
     return this._authService.getEmail();
   }
 
-  resetPassword() {
-    this._authService.doResetPassword(this.email).then(res => {
-      this._messageService.showMessage("E-Mail zum Zurücksetzen wurde versendet. Bitte nach Ändern des Passworts erneut anmelden.");
-      this.closeSidenav()
-      this._gotToSignIn();
-    });
-  }
-
   get isLoggedIn() {
     return this._authService.isLoggedIn();
   }
@@ -63,7 +55,7 @@ export class AppComponent {
 
   signOut() {
     this._authService.doLogout();
-    this.closeSidenav()
+    this.closeSidenav();
     this._gotToSignIn();
   }
 

@@ -1,17 +1,17 @@
-import { Component } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { Item } from "../../models/item";
-import { CompartmentService } from "../../services/compartment.service";
-import { Compartment } from "../../models/compartment";
-import { Observable } from "rxjs";
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Item } from '../../models/item';
+import { CompartmentService } from '../../services/compartment.service';
+import { Compartment } from '../../models/compartment';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
   templateUrl: './new-item-dialog.component.html',
   styleUrls: ['./new-item-dialog.component.scss']
 })
-export class NewItemDialogComponent {
+export class NewItemDialogComponent implements OnInit {
 
   newForm: FormGroup;
   compartments: Observable<Compartment[]>;
