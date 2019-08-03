@@ -1,5 +1,5 @@
 # Freezer
 My personal freezer app created with
-* Angular 7
-* Angular Material 7
+* Angular 8
+* Angular Material 8
 * Firebase Realtime Database
