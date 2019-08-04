@@ -40,24 +40,6 @@ export class AuthService {
     return firebase.auth().currentUser != null;
   }
 
-  doRegister(value) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-        .then(res => {
-          resolve(res);
-        }, err => reject(err));
-    });
-  }
-
-  doLogin(value) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().signInWithEmailAndPassword(value.email, value.password)
-        .then(res => {
-          resolve(res);
-        }, err => reject(err));
-    });
-  }
-
   doGoogleLogin() {
     return new Promise<any>((resolve, reject) => {
       this._auth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then(res => {
@@ -74,15 +56,6 @@ export class AuthService {
       } else {
         reject();
       }
-    });
-  }
-
-  doResetPassword(email: string) {
-    return new Promise<any>((resolve, reject) => {
-      firebase.auth().sendPasswordResetEmail(email)
-        .then(res => {
-          resolve(res);
-        }, err => reject(err));
     });
   }
 }

@@ -48,6 +48,7 @@ export class SignInComponent implements OnInit {
       if (res.user && this.users.filter(u => u.email === res.user.email).length > 0) {
         this._router.navigate(['/']);
       } else {
+        this._authService.doLogout();
         this._messageService.showMessage('Anmeldung fehlgeschlagen.', 'Wiederholen?').onAction().subscribe(() => this.login());
       }
     }, err => {
