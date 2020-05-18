@@ -25,13 +25,11 @@
     <mat-list-item *ngFor="let item of filteredItems; trackByKey" [class.active]="item.selected" (click)="selectItem(item)">
       <div mat-line class="item-property-container">
         <div class="left-item">
-          <small>
           <strong>{{item.name}} </strong>
           <ng-container *ngIf="item.amount">{{item.amount}} </ng-container>
-        </small>
         </div>
         <span>
-        <small>{{getCompartment(item.compartmentKey)?.name}}</small>
+        {{getCompartment(item.compartmentKey)?.name}}
       </span>
       </div>
       <div mat-line class="item-property-container item-secondary">
