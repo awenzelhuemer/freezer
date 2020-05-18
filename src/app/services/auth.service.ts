@@ -77,6 +77,7 @@ export class AuthService {
     try {
       await this._auth.sendPasswordResetEmail(passwordResetEmail);
       this._messageService.showMessage('E-Mail zum Rücksetzen des Passworts wurde versendet. Bitte überprüfen Sie ihre Mailbox.');
+      this._router.navigateByUrl('/');
     }
     catch (error) {
       this._messageService.showMessage(error.message);
