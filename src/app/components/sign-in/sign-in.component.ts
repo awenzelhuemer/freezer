@@ -17,8 +17,8 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 export class SignInComponent {
 
   signInForm = this._fb.group({
-    email: ['andreas.wenzelhuemer@gmail.com',[ Validators.email, Validators.required]],
-    password: ['Protoss1', Validators.required]
+    email: ['',[ Validators.email, Validators.required]],
+    password: ['', Validators.required]
   });
 
   constructor(
