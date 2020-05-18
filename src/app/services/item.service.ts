@@ -3,6 +3,8 @@ import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Item } from '../models/item';
+import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +19,17 @@ export class ItemService {
   constructor(
     private _db: AngularFireDatabase
   ) {
-    this._itemRef = _db.list<Item>('items', ref => ref.orderByChild('name'));
+    this._itemRef = _db.list<Item>(this.getUser().uid + '/items', ref => ref.orderByChild('name'));
     // Use snapshotChanges().map() to store the key
     this.items = this._itemRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
+  }
+
+  getUser(){
+    return JSON.parse(localStorage.getItem('user')) as User;
   }
 
   get() {

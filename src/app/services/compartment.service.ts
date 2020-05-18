@@ -6,6 +6,8 @@ import { Compartment } from '../models/compartment';
 import { map } from 'rxjs/operators';
 import { Item } from '../models/item';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +22,17 @@ export class CompartmentService {
   constructor(
     db: AngularFireDatabase
   ) {
-    this._compartmentRef = db.list<Compartment>('compartments', ref => ref.orderByChild('name'));
+    this._compartmentRef = db.list<Compartment>(`${this.getUser().uid}/compartments`, ref => ref.orderByChild('name'));
     // Use snapshotChanges().map() to store the key
     this.compartments = this._compartmentRef.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
     );
+  }
+
+  getUser(){
+    return JSON.parse(localStorage.getItem('user')) as User;
   }
 
   get() {

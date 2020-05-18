@@ -1,25 +1,25 @@
-<div class="sign-in-container">
-  <mat-card class="sign-in-form">
+<div class="sign-up-container">
+  <mat-card class="sign-up-form">
     <mat-card-content>
-      <form [formGroup]="signInForm" (ngSubmit)="login()">
+      <form [formGroup]="signUpForm" (ngSubmit)="register()">
 
         <mat-form-field class="w-100">
           <mat-label>Email</mat-label>
           <input matInput type="text" formControlName="email" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="w-100">
+          <mat-label>Email bestätigen</mat-label>
+          <input matInput type="text" formControlName="emailConfirmation" autocomplete="off">
+        </mat-form-field>
+        <mat-form-field class="w-100">
           <mat-label>Passwort</mat-label>
           <input matInput type="password" formControlName="password" autocomplete="off">
         </mat-form-field>
-
-        <button mat-button class="w-100" [disabled]="signInForm.invalid">
-          Anmelden
-        </button>
-        <button mat-button type="button" (click)="register()" class="w-100">
+        <button mat-button class="w-100">
           Registrieren
         </button>
-        <button mat-button type="button" (click)="resetPassword()" class="w-100">
-          Passwort zurücksetzen
+        <button type="button" (click)="signIn()" mat-button class="w-100">
+          Zurück zum Anmelden
         </button>
       </form>
     </mat-card-content>

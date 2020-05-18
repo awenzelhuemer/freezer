@@ -17,10 +17,11 @@ export class CompartmentListComponent implements OnInit {
     private _compartmentService: CompartmentService
     , private _dialogService: DialogService
     , private _titleService: TitleService
-  ) { }
+  ) { 
+    this._titleService.set('Gefrierfächer');
+  }
 
   ngOnInit() {
-    this._titleService.set('Gefrierfächer');
     this._compartmentService.get().subscribe(c => this.compartments = c);
   }
 

@@ -10,15 +10,14 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  selector: 'reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class SignInComponent {
+export class ResetPasswordComponent {
 
-  signInForm = this._fb.group({
-    email: ['andreas.wenzelhuemer@gmail.com',[ Validators.email, Validators.required]],
-    password: ['Protoss1', Validators.required]
+  resetPasswordForm = this._fb.group({
+    email: ['', [Validators.email, Validators.required]],
   });
 
   constructor(
@@ -27,19 +26,15 @@ export class SignInComponent {
     private _titleService: TitleService,
     private _fb: FormBuilder
   ) {
-    this._titleService.set('Anmelden');
+    this._titleService.set('Passwort zurücksetzen');
   }
 
-  login() {
-    var user = this.signInForm.value;
-    this._authService.signIn(user.email, user.password);
+  reset() {
+    var email = this.resetPasswordForm.value.email;
+    this._authService.resetPassword(email);
   }
 
-  register() {
-    this._router.navigateByUrl('/sign-up');
-  }
-
-  resetPassword(){
-    this._router.navigateByUrl('/reset-password');
+  signIn() {
+    this._router.navigateByUrl('/sign-in');
   }
 }

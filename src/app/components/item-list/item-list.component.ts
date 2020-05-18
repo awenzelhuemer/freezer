@@ -36,10 +36,10 @@ export class ItemListComponent implements OnInit {
     });
 
     this.filterForm.valueChanges.subscribe(v => this.filter());
+    this._titleService.set('Inhalte');
   }
 
   ngOnInit() {
-    this._titleService.set('Inhalte');
     this._compartmentService.get().subscribe(c => this.compartments = c);
 
     this.showLoadingIndicator = true;

@@ -22,6 +22,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { MessageDialogComponent } from './components/message-dialog/message-dialog.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 registerLocaleData(localeAT);
 
@@ -37,6 +39,7 @@ registerLocaleData(localeAT);
     , LoadingComponent
     , MessageDialogComponent
     , SignInComponent
+    , SignUpComponent, ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
