@@ -19,7 +19,7 @@ export class ItemService {
   constructor(
     private _db: AngularFireDatabase
   ) {
-    this._itemRef = _db.list<Item>(this.getUser().uid + '/items', ref => ref.orderByChild('name'));
+    this._itemRef = _db.list<Item>(`${this.getUser().uid}/items`, ref => ref.orderByChild('name'));
     // Use snapshotChanges().map() to store the key
     this.items = this._itemRef.snapshotChanges().pipe(
       map(changes =>
