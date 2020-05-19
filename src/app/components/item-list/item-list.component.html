@@ -1,20 +1,19 @@
 
 <mat-toolbar color="primary" class="filter-container">
-  <form [formGroup]="filterForm">
-
-    <mat-form-field class="filter">
+  <form [formGroup]="filterForm" class="w-100">
+    <div class="filter-fields-container">
+    <mat-form-field class="filter-fill">
       <input type="text" placeholder="Name" matInput formControlName="name" autocomplete="off" />
     </mat-form-field>
-
-    <mat-form-field class="filter">
+    <mat-form-field class="filter-fixed">
       <mat-select placeholder="Gefrierfach" formControlName="compartmentKey">
         <mat-option [value]="null"></mat-option>
         <mat-option *ngFor="let compartment of compartments" [value]="compartment.key">
           {{compartment.name}}
-
         </mat-option>
       </mat-select>
     </mat-form-field>
+  </div>
   </form>
 </mat-toolbar>
 
@@ -25,20 +24,19 @@
     <mat-list-item *ngFor="let item of filteredItems; trackByKey" [class.active]="item.selected" (click)="selectItem(item)">
       <div mat-line class="item-property-container">
         <div class="left-item">
-          <strong>{{item.name}} </strong>
+          {{item.name}} 
           <ng-container *ngIf="item.amount">{{item.amount}} </ng-container>
         </div>
         <span>
         {{getCompartment(item.compartmentKey)?.name}}
       </span>
       </div>
-      <div mat-line class="item-property-container item-secondary">
+      <div mat-line class="item-property-container">
         <div class="left-item" *ngIf="item.createdDate"  [ngClass]="getDateAddedStyle(item.createdDate)">
           Eingelagert: {{item.createdDate | date}}
         </div>
         <span *ngIf="item.expiryDate" [ngClass]="getDateExpirationStyle(item.expiryDate)">Min. haltbar: {{item.expiryDate | date}}</span>
       </div>
-
       <mat-divider></mat-divider>
     </mat-list-item>
     <!-- empty -->

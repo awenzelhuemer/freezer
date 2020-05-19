@@ -4,6 +4,11 @@
   z-index: 1000;
 }
 
+.filter-fields-container {
+  display: flex;
+  flex-direction: columns;
+}
+
 .item-container {
   margin-top: 64px;
 }
@@ -14,7 +19,12 @@
   }
 }
 
-.filter {
+.filter-fill{
+  width: 100%;
+  margin: 10px;
+}
+
+.filter-fixed {
   width: 110px;
   margin: 10px;
 }

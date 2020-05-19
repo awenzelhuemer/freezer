@@ -3,7 +3,7 @@
     <mat-list-item *ngFor="let compartment of compartments"
                    [class.active]="compartment.selected"
                    (click)="selectCompartment(compartment)">
-      <strong class="item-secondary">{{compartment.name}}</strong>
+      {{compartment.name}}
       <mat-divider></mat-divider>
     </mat-list-item>
   </mat-list>
