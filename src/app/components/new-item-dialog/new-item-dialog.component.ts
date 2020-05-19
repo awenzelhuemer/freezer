@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AbstractControl } from '@angular/forms';
 import { Item } from '../../models/item';
 import { CompartmentService } from '../../services/compartment.service';
 import { Compartment } from '../../models/compartment';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
 
 @Component({
   templateUrl: './new-item-dialog.component.html',
@@ -32,6 +33,10 @@ export class NewItemDialogComponent implements OnInit {
       expiryDate: [moment().add(200, 'days')],
       compartmentKey: ['', Validators.required]
     });
+  }
+  
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
   }
 
   submit(): void {

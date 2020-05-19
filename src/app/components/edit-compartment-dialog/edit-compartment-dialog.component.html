@@ -4,7 +4,7 @@
   <div mat-dialog-content>
     <mat-form-field style="width:100%;">
       <input matInput placeholder="Name" formControlName="name" required autocomplete="off">
-      <mat-error>Name ist ein Pflichtfeld.</mat-error>
+      <mat-error>{{getErrorMessage(editForm.get('name'))}}</mat-error>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

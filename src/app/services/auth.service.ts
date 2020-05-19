@@ -21,16 +21,19 @@ export class AuthService {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
     this._auth.authState.subscribe(user => {
-      if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
-        this._router.navigateByUrl('/');
-      } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
-      }
+      this._setUserInLocalStorage(user);
     });
+  }
+
+  private _setUserInLocalStorage(user: firebase.User){
+    if (user) {
+      this.userData = user;
+      localStorage.setItem('user', JSON.stringify(this.userData));
+      JSON.parse(localStorage.getItem('user'));
+    } else {
+      localStorage.setItem('user', null);
+      JSON.parse(localStorage.getItem('user'));
+    }
   }
 
   async signIn(email: string, password: string) {
@@ -39,9 +42,14 @@ export class AuthService {
 
       if (result.user.emailVerified !== true) {
         this.sendVerificationEmail();
-        this._messageService.showMessage('Bitte bestätigen Sie ihre E-Mail. Bitte überprüfen Sie ihre Mailbox.');
       }
+
+      // update local storage
+      this._setUserInLocalStorage(result.user);
+      // update user data in db
       this._setUserData(result.user);
+      // navigate to root url
+      this._router.navigateByUrl('/');
 
     } catch (error) {
       this._messageService.showMessage(error);
@@ -50,7 +58,7 @@ export class AuthService {
 
   async sendVerificationEmail() {
     const user = await this._auth.currentUser;
-
+    this._messageService.showMessage('Wir haben Ihnen eine Bestätigungsmail zugesandt. Bitte überprüfen Sie ihre Mailbox.');
     return user.sendEmailVerification()
     .then(() => {
       this._router.navigateByUrl('/');

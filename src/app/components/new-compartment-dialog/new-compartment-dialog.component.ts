@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
 
 @Component({
   selector: 'new-compartment-dialog',
@@ -22,6 +23,10 @@ export class NewCompartmentDialogComponent implements OnInit {
     this.newForm = this._formBuilder.group({
       name: ['', Validators.required]
     });
+  }
+
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
   }
 
   submit(): void {

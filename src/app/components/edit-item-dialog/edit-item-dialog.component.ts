@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { Item } from '../../models/item';
 import { CompartmentService } from '../../services/compartment.service';
 import { Observable } from 'rxjs';
 import { Compartment } from '../../models/compartment';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
 
 @Component({
   selector: 'edit-item-dialog',
@@ -26,6 +27,10 @@ export class EditItemDialogComponent implements OnInit {
   ngOnInit() {
     this.editForm = this._formBuilder.group(this._data);
     this.compartments = this._compartmentService.get();
+  }
+
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
   }
 
   submit(): void {

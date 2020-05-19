@@ -6,7 +6,8 @@ import { TitleService } from '../../services/title.service';
 import { User } from '../../models/user';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -34,6 +35,11 @@ export class SignInComponent {
     var user = this.signInForm.value;
     this._authService.signIn(user.email, user.password);
   }
+
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
+  }
+
 
   register() {
     this._router.navigateByUrl('/sign-up');

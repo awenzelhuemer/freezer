@@ -3,19 +3,31 @@
     <mat-card-content>
       <form [formGroup]="signUpForm" (ngSubmit)="register()">
 
-        <mat-form-field class="w-100">
-          <mat-label>Email</mat-label>
-          <input matInput type="text" formControlName="email" autocomplete="off">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Email bestätigen</mat-label>
-          <input matInput type="text" formControlName="emailConfirmation" autocomplete="off">
-        </mat-form-field>
-        <mat-form-field class="w-100">
-          <mat-label>Passwort</mat-label>
-          <input matInput type="password" formControlName="password" autocomplete="off">
-        </mat-form-field>
-        <button mat-button class="w-100">
+        <ng-container formGroupName="emails">
+          <mat-form-field class="w-100">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" formControlName="email" autocomplete="off">
+            <mat-error>{{getErrorMessage(signUpForm.get('emails').get('email'))}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Email bestätigen</mat-label>
+            <input matInput type="text" formControlName="emailConfirmation" autocomplete="off" [errorStateMatcher]="matcher">
+            <mat-error>{{getErrorMessage(signUpForm.get('emails'))}}</mat-error>  
+          </mat-form-field>
+        </ng-container>
+        <ng-container formGroupName="passwords">
+          <mat-form-field class="w-100">
+            <mat-label>Passwort</mat-label>
+            <input matInput type="password" formControlName="password" autocomplete="off">
+            <mat-error>{{getErrorMessage(signUpForm.get('passwords').get('password'))}}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-100">
+            <mat-label>Passwort bestätigen</mat-label>
+            <input matInput type="password" formControlName="passwordConfirmation" autocomplete="off" [errorStateMatcher]="matcher">
+            <mat-error>{{getErrorMessage(signUpForm.get('passwords'))}}</mat-error>  
+          </mat-form-field>
+        </ng-container>
+        <button mat-button class="w-100" [disabled]="signUpForm.invalid">
           Registrieren
         </button>
         <button type="button" (click)="signIn()" mat-button class="w-100">

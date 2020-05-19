@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Compartment } from '../../models/compartment';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
 
 @Component({
   selector: 'edit-compartment-dialog',
@@ -19,6 +20,10 @@ export class EditCompartmentDialogComponent implements OnInit {
 
   ngOnInit() {
     this.editForm = this._formBuilder.group(this._data);
+  }
+
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
   }
 
   submit(): void {

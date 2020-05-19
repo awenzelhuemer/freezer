@@ -6,7 +6,9 @@ import { TitleService } from '../../services/title.service';
 import { User } from '../../models/user';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import { ValidationHelper } from 'src/app/helper/validation-helper';
+import { MyErrorStateMatcher } from 'src/app/helper/my-error-state-matcher';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -16,10 +18,18 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 })
 export class SignUpComponent {
 
+  matcher = new MyErrorStateMatcher();
+
   signUpForm = this._fb.group({
-    email: ['', [Validators.email, Validators.required]],
-    emailConfirmation: ['', [Validators.email, Validators.required]],
-    password: ['', Validators.required]
+    emails: this._fb.group({
+      email: ['', [Validators.email, Validators.required]],
+      emailConfirmation: ['', [Validators.email, Validators.required]],
+    }, { validators: ValidationHelper.checkEmails }),
+    passwords: this._fb.group({
+      password: ['', Validators.required],
+      passwordConfirmation: ['', [Validators.required]],
+    }, { validators: ValidationHelper.checkPasswords })
+    
   });
 
   constructor(
@@ -34,11 +44,12 @@ export class SignUpComponent {
 
   register() {
     var user = this.signUpForm.value;
-    if (user.email != user.emailConfirmation) {
-      this._messageService.showMessage('E-Mails müssen übereinstimmen.');
-    } else {
-      this._authService.signUp(user.email, user.password);
-    }
+    this._authService.signUp(user.emails.email, user.passwords.password);
+
+  }
+
+  getErrorMessage(control: AbstractControl){
+    return ValidationHelper.getErrorMessage(control);
   }
 
   signIn() {
